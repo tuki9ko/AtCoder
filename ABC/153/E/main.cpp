@@ -59,25 +59,21 @@ template <typename T> inline bool chmax(T& a, const T& b) {bool compare = a < b;
 
 int main() {
     ll H, N;
-    ll d[1010], m[1010];
-    ll dp[1010][1000000];
-/*
     cin >> H >> N;
-    rep(i, N) cin >> d[i] >> m[i];
 
-    reps(h, 1, H+1) dp[0][h] = 9999999;
+    vi A(N), B(N);
+    vll dp(H+1, LLONG_MAX);
 
-    reps(i, 1, N){
-        reps(h, 1, H + 1){
-            if(h >= 0){
-                dp[i+1][h] = min(dp[i][h+d[i]]+m[i], dp[i][h]);
-            }
-            else{
-                dp[i+1][h] = dp[i][h];
-            }
+    rep(i, N){
+        cin >> A[i] >> B[i];
+    }
+
+    dp[0] = 0;
+    rep(i, N){
+        rep(j, H){
+            if(dp[j] != LLONG_MAX) dp[min(j + A[i], H)] = min(dp[min(j + A[i], H)], dp[j] + B[i]);
         }
     }
 
-    cout << dp[N][H];
-    */
+    cout << dp[H];
 }
